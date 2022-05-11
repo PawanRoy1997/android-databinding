@@ -20,7 +20,6 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -60,10 +59,10 @@ class PlainOldActivity : AppCompatActivity() {
      * This method is triggered by the `android:onclick` attribute in the layout. It puts business
      * logic in the activity, which is not ideal. We should do something about that.
      */
-    fun onLike(v: View) {
-        viewModel.onLike()
-        updateLikes()
-    }
+//    fun onLike(v: View) {
+//        viewModel.onLike()
+//        updateLikes()
+//    }
 
     /**
      * So much findViewById! We'll fix that with Data Binding.
@@ -71,8 +70,9 @@ class PlainOldActivity : AppCompatActivity() {
     private fun updateName() {
 //        findViewById<TextView>(R.id.plain_name).text = viewModel.name
 //        findViewById<TextView>(R.id.plain_lastname).text = viewModel.lastName
-        binding.name = viewModel.name
-        binding.lastName = viewModel.lastName
+//        binding.name = viewModel.name
+//        binding.lastName = viewModel.lastName
+        binding.viewModel = viewModel
     }
 
     /**

@@ -27,24 +27,30 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
-import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.example.android.databinding.basicsample.R
 import com.example.android.databinding.basicsample.data.Popularity
 import com.example.android.databinding.basicsample.data.SimpleViewModel
+import com.example.android.databinding.basicsample.databinding.PlainActivityBinding
 
 /**
  * Plain old activity with lots of problems to fix.
  */
 class PlainOldActivity : AppCompatActivity() {
 
+    private lateinit var binding: PlainActivityBinding
+
     // Obtain ViewModel from ViewModelProviders
-    private val viewModel by lazy { ViewModelProviders.of(this).get(SimpleViewModel::class.java) }
+    private val viewModel by lazy { ViewModelProvider(this).get(SimpleViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.plain_activity)
+//        setContentView(R.layout.plain_activity)
 
+        binding =
+            DataBindingUtil.setContentView(this, R.layout.plain_activity)
         // TODO: Explicitly setting initial values is a bad pattern. We'll fix that.
         updateName()
         updateLikes()
@@ -54,7 +60,7 @@ class PlainOldActivity : AppCompatActivity() {
      * This method is triggered by the `android:onclick` attribute in the layout. It puts business
      * logic in the activity, which is not ideal. We should do something about that.
      */
-    fun onLike(view: View) {
+    fun onLike(v: View) {
         viewModel.onLike()
         updateLikes()
     }
@@ -63,8 +69,10 @@ class PlainOldActivity : AppCompatActivity() {
      * So much findViewById! We'll fix that with Data Binding.
      */
     private fun updateName() {
-        findViewById<TextView>(R.id.plain_name).text = viewModel.name
-        findViewById<TextView>(R.id.plain_lastname).text = viewModel.lastName
+//        findViewById<TextView>(R.id.plain_name).text = viewModel.name
+//        findViewById<TextView>(R.id.plain_lastname).text = viewModel.lastName
+        binding.name = viewModel.name
+        binding.lastName = viewModel.lastName
     }
 
     /**
